@@ -1,0 +1,17 @@
+<dataConfig>
+	<dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/bookstore" user="root" password="" />
+	<document>
+		<entity name="book" query="SELECT id, title, author, category, description from book">
+			<field column="id" name="id" />
+			<field column="title" name="title" />
+			<field column="description" name="description" />
+			<entity name="category_name" query="SELECT cat_name FROM category c where c.id = '${book.category}'">
+				<field name="category_name" column="cat_name" />
+			</entity>
+			<entity name="author_name" query="SELECT name FROM author a where a.id = '${book.author}'">
+				<field name="author_name" column="name" />
+			</entity>
+			<field column="last_modified" name="last_modified"/>
+		</entity>
+	</document>
+</dataConfig>
